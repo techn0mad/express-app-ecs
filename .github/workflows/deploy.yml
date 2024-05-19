@@ -60,7 +60,7 @@ jobs:
           --task-definition express-app-task \
           --desired-count 1 \
           --launch-type FARGATE \
-          --network-configuration "awsvpcConfiguration={subnets=[subnet-04d86d5f],securityGroups=[sg-fcea2586],assignPublicIp=ENABLED}"
+          --network-configuration "awsvpcConfiguration={subnets=[subnet-04d86d5f],securityGroups=[sg-008839e118a45a776],assignPublicIp=ENABLED}"
 
     #- name: Wait for service to be stable
     #  run: |
