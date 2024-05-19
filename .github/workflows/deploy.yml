@@ -39,6 +39,26 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
+    - name: Wait for service to be stable
+      run: |
+        aws ecs wait services-stable --cluster express-app-cluster --services express-app-service || true
+
+    - name: Stop ECS service
+      run: |
+        aws ecs update-service --cluster express-app-cluster --service express-app-service --desired-count 0 || true
+
+    - name: Delete ECS service
+      run: |
+        aws ecs delete-service --cluster express-app-cluster --service express-app-service --force || true
+
+    - name: Deregister task definition
+      run: |
+        aws ecs deregister-task-definition --task-definition express-app-task || true
+
+    - name: Delete ECS cluster
+      run: |
+        aws ecs delete-cluster --cluster express-app-cluster || true
+
     - name: Create ECS cluster
       run: |
         aws ecs create-cluster --cluster-name express-app-cluster
