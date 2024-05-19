@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to AWS ECS
 'on':
   push:
     branches:
@@ -29,6 +29,10 @@ jobs:
     name: Deploy Container to AWS ECS
     needs: build
     runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
