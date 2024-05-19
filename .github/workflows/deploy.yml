@@ -27,6 +27,7 @@ jobs:
 
   deploy:
     name: Deploy Container to AWS ECS
+    needs: build
     runs-on: ubuntu-latest
 
     - name: Configure AWS credentials
@@ -78,23 +79,23 @@ jobs:
           --launch-type FARGATE \
           --network-configuration "awsvpcConfiguration={subnets=[subnet-04d86d5f],securityGroups=[sg-fcea2586],assignPublicIp=ENABLED}"
 
-    - name: Wait for service to be stable
-      run: |
-        aws ecs wait services-stable --cluster express-app-cluster --services express-app-service
+    #- name: Wait for service to be stable
+    #  run: |
+    #    aws ecs wait services-stable --cluster express-app-cluster --services express-app-service
 
-#    - name: Stop ECS service
-#      run: |
-#        aws ecs update-service --cluster express-app-cluster --service express-app-service --desired-count 0
-#
-#    - name: Delete ECS service
-#      run: |
-#        aws ecs delete-service --cluster express-app-cluster --service express-app-service --force
-#
-#    - name: Deregister task definition
-#      run: |
-#        aws ecs deregister-task-definition --task-definition express-app-task
-#
-#    - name: Delete ECS cluster
-#      run: |
-#        aws ecs delete-cluster --cluster express-app-cluster
-#
+    #- name: Stop ECS service
+    #  run: |
+    #    aws ecs update-service --cluster express-app-cluster --service express-app-service --desired-count 0
+
+    #- name: Delete ECS service
+    #  run: |
+    #    aws ecs delete-service --cluster express-app-cluster --service express-app-service --force
+
+    #- name: Deregister task definition
+    #  run: |
+    #    aws ecs deregister-task-definition --task-definition express-app-task
+
+    #- name: Delete ECS cluster
+    #  run: |
+    #    aws ecs delete-cluster --cluster express-app-cluster
+
