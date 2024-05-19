@@ -7,7 +7,6 @@ name: Deploy to AWS ECS
 jobs:
   deploy:
     name: Deploy Container to AWS ECS
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
