@@ -1,6 +1,6 @@
 name: Build and deploy to AWS ECS
 'on':
-  workflow_dispatch
+  workflow_dispatch:
 
   push:
     branches:
