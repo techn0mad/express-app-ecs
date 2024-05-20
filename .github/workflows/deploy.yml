@@ -112,7 +112,7 @@ jobs:
 
     - name: Redeploy tasks
       run: |
-        aws ecs update-service --force-new-deployment --service express-app-service
+        aws ecs update-service -cluster express-app-cluster --force-new-deployment --service express-app-service
 
     #- name: Stop ECS service
     #  run: |
