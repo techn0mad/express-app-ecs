@@ -43,10 +43,6 @@ jobs:
     #  run: |
     #    aws ecs wait services-stable --cluster express-app-cluster --services express-app-service || true
 
-    - name: Stop ECS task
-      run: |
-        aws ecs stop-task --cluster express-app-cluster --task express-app-task || true
-
     - name: Deregister task definition
       run: |
         aws ecs deregister-task-definition --task-definition express-app-task || true
@@ -112,7 +108,7 @@ jobs:
 
     - name: Redeploy tasks
       run: |
-        aws ecs update-service -cluster express-app-cluster --force-new-deployment --service express-app-service
+        aws ecs update-service --cluster express-app-cluster --force-new-deployment --service express-app-service
 
     #- name: Stop ECS service
     #  run: |
