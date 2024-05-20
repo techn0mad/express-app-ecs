@@ -103,7 +103,7 @@ jobs:
 
     - name: Redeploy tasks
       run: |
-        aws ecs update-service --force-new-deployment
+        aws ecs update-service --force-new-deployment --service express-app-service
 
     - name: Wait for service to be stable
       run: |
