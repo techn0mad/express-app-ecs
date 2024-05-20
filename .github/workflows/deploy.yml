@@ -71,7 +71,7 @@ jobs:
           "networkMode": "awsvpc",
           "containerDefinitions": [
             {
-              "name": "express-app-ecs",
+              "name": "express-app",
               "image": "techn0mad/express-app:latest",
               "essential": true,
               "memory": 512,
@@ -101,9 +101,9 @@ jobs:
           --launch-type FARGATE \
           --network-configuration "awsvpcConfiguration={subnets=[subnet-04d86d5f],securityGroups=[sg-008839e118a45a776],assignPublicIp=ENABLED}"
 
-    #- name: Wait for service to be stable
-    #  run: |
-    #    aws ecs wait services-stable --cluster express-app-cluster --services express-app-service
+    - name: Wait for service to be stable
+      run: |
+        aws ecs wait services-stable --cluster express-app-cluster --services express-app-service
 
     #- name: Stop ECS service
     #  run: |
